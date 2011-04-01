@@ -1,0 +1,34 @@
+bassvamp.py
+-----------
+
+As a proud owner of a Behringer Bass V-Amp2 and, more than that, a Linux
+enthusiast, I was forced to hack a couple of scripts to program the presets
+on my unit without the burden of having to reboot my computer into another
+operating system or boot a virtual machine.
+
+Later on I thought about writing a GUI to the scripts, and chose python,
+PyQt and QT4 as the tools for the job. I used QT Designer to create the
+prototype interface used here.
+
+Right now a few pieces of the MIDI related code need to be re-adapted,
+as I modified a few bits of code in order to publish it in this git tree.
+
+The initial idea was to have an interface to load and store presets both
+on the Bass V-Amp unit and on files (.syx). This is mostly done and the
+interface reflects what was read from the unit or from file.
+
+As this is just the first stab at the introductory text, I will make it
+short and stop here. Hopefully soon I will describe all the features 
+already implemented and list the TODO tasks.
+
+
+* To convert from QtDesigner .ui files to python code:
+
+	pyuic4 BassVamp.ui > qt_bassvamp.py
+
+* License:
+
+This code is GPL. The necessary license files and related stuff will be
+added soon. 
+
+
