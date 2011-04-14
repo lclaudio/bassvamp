@@ -165,14 +165,22 @@ class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 		QtCore.QObject.connect(self.Preset_lineEdit, \
 				QtCore.SIGNAL("editingFinished()"), \
 				self.change_preset_name) 
-		# Load From File actionterfacen 
+		# Load From File action
 		QtCore.QObject.connect(self.actionLoad_From_File, \
 				QtCore.SIGNAL("triggered()"), \
 				self.select_file_to_open) 
+		# Load From Device action
+		QtCore.QObject.connect(self.actionLoad_From_Device, \
+				QtCore.SIGNAL("triggered()"), \
+				self.read_vamp_preset) 
 		# Save To File action 
 		QtCore.QObject.connect(self.actionSave_To_File, \
 				QtCore.SIGNAL("triggered()"), \
 				self.select_file_to_save) 
+		# Save To Device action 
+		QtCore.QObject.connect(self.actionSave_To_Device, \
+				QtCore.SIGNAL("triggered()"), \
+				self.write_vamp_preset) 
 		# Select MIDI Device action 
 		QtCore.QObject.connect(self.actionSelect_MIDI_device, \
 				QtCore.SIGNAL("triggered()"), \
@@ -186,9 +194,10 @@ class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 
 	def select_midi_device(self, devlist, index):
 		aux = QtGui.QInputDialog()
-		aux.setOption(aux.UseListViewForComboBoxItems)
-		device, ok = aux.getItem(self, "Select MIDI Device", "Devices:", \
-				QtCore.QStringList(devlist), index, False) 
+		aux.setOption(aux.UseListViewForComboBoxItems, False)
+		aux.adjustSize()
+		device, ok = aux.getItem(self, "Select MIDI Device", \
+				"Devices:", devlist, index, False) 
 		if ok == 0: # cancel was pressed
 			ret = None
 		else:
@@ -210,7 +219,7 @@ class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 				index = 0
 
 		mididevice = self.select_midi_device(devlist, index)
-		self.print_msg(mididevice)
+		self.print_msg(mididevice + "\n")
 		if mididevice == None:
 			self.warning_msg("No MIDI device selected!")
 			return
@@ -231,7 +240,7 @@ class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 		self.print_msg("Modified: %s\n" % after)
 		msg = "Writing %s\n" % self.get_preset_name()
 		self.print_msg(msg)
-		self.write_current_preset()
+		self.write_current_preset():
 
 	def read_vamp_preset(self):
 		if not self.midi:

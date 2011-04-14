@@ -30,35 +30,31 @@ class BVamp():
 		self.data = result
 
 	def write_current_preset(self):
-		if not self.data:
-			# this is wrong, need to be able to crete from scratch
-			self.print_msg("No data available, reading current preset\n")
-			self.load_current_preset()
-			return 
 		s = self.convert_preset_to_ascii()
 		cmd = 'amidi -p hw:%s -S "%s%s" -r /dev/stdout -t 1' % \
 					(self.midi, CMD_write_current_preset, s)
-		print cmd
 		aux = os.popen(cmd)
 		result = aux.readlines()
 		aux.close()
-		print self.convert_data_to_ascii(result)
 
 	def list_midi_devices(self):
+		mididevice_list = []
 		aux = os.popen("amidi -l")
-		self.mididevice_list = aux.readlines()[1:]
+		devlist = aux.readlines()[1:]
 		aux.close()
-		return self.mididevice_list
+		for i in devlist:
+			mididevice_list.append(i[:-1])	
+		return mididevice_list
 
 	# hardcoded to use the 'UM-1G MIDI' midi device
 	def setup_midi(self, device):
 		self.midi = device.split()[1][3:]
-		text = self.identify_vamp_device()
+		text = self.identify_vamp_device(self.midi)
 		return text, self.midi
 
-	def identify_vamp_device(self):
+	def identify_vamp_device(self, midi):
 		cmd = 'amidi -p hw:%s -S "%s" -r /dev/stdout -t 1' % \
-					(self.midi, CMD_identify_device)
+					(midi, CMD_identify_device)
 		aux = os.popen(cmd)
 		result = aux.readlines()
 		aux.close()
