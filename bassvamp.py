@@ -240,7 +240,7 @@ class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 		self.print_msg("Modified: %s\n" % after)
 		msg = "Writing %s\n" % self.get_preset_name()
 		self.print_msg(msg)
-		self.write_current_preset():
+		self.write_current_preset()
 
 	def read_vamp_preset(self):
 		if not self.midi:
