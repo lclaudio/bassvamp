@@ -8,6 +8,7 @@ import os
 
 BEHRINGER_SIGNATURE = "\x00\x20\x32"
 CMD_load_current_preset = "F0 00 20 32 00 13 60 7F F7"
+CMD_load_specific_preset = "F0 00 20 32 00 13 60"
 CMD_load_all_presets = "F0 00 20 32 00 13 61 F7"
 CMD_write_current_preset = "F0 00 20 32 00 13 20 7F"
 CMD_write_all_presets = "F0 00 20 32 00 13 21"
@@ -20,6 +21,7 @@ class BVamp():
 		self.midi = None
 		self.modified = 0
 		self.device = 0
+		self.all_data = None
 
 	def load_current_preset(self):
 		cmd = 'amidi -p hw:%s -S "%s" -r /dev/stdout -t 1' % \
@@ -28,6 +30,18 @@ class BVamp():
 		result = aux.read(66)
 		aux.close()
 		self.data = result
+
+	def load_all_presets(self):
+		if not self.needs_refresh:
+			return self.all_data
+		cmd = 'amidi -p hw:%s -S "%s" -r /dev/stdout -t 1' % \
+				(self.midi, CMD_load_all_presets)
+		aux = os.popen(cmd)
+		result = aux.read(7010)
+		aux.close()
+		self.all_data = result
+		self.needs_refresh = False
+		return self.all_data
 
 	def write_current_preset(self):
 		s = self.convert_preset_to_ascii()
@@ -291,4 +305,26 @@ class BVamp():
 		aux = open(fname, "rb")
 		self.data = aux.read(66)
 		aux.close()
+
+	def get_preset_list(self):
+		presets = []
+		aux = self.load_all_presets()
+		for i in range(1,126):
+			# neat trick to get the preset name from data dump
+			presets.append(aux[(i*56-7):(i*56+9)])
+		return presets
+
+	def get_preset_from_data(self, index):
+		# I will try the commented code again, later
+		#pos = index * 56 + 9
+		#self.data = CMD_write_current_preset + \
+		#		self.all_data[pos:(pos+56)] + chr(0xF7)
+		CMD_load_specific_preset
+		cmd = 'amidi -p hw:%s -S "%s %02X F7" -r /dev/stdout -t 1' % \
+				(self.midi, CMD_load_specific_preset, index)
+		aux = os.popen(cmd)
+		result = aux.read(66)
+		aux.close()
+		self.data = result
+
 

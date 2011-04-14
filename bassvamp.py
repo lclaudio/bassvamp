@@ -31,6 +31,7 @@ Split_Steps = [ 41, 49, 58, 70, 84, 101, 121, 145, 174, 209, 251, 301, 362,
 class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 	def __init__(self):
 		self.path = os.getcwd()
+		self.needs_refresh = True
 		QMainWindow.__init__(self)
 		BVamp.__init__(self)
 
@@ -233,11 +234,12 @@ class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 		if not self.midi:
 			self.warning_msg("No midi device selected\n")
 			return
-		before = self.convert_preset_to_ascii()
+		self.needs_refresh = True
+		#before = self.convert_preset_to_ascii()
 		self.apply_changes_to_preset()
-		after = self.convert_preset_to_ascii()
-		self.print_msg("Original: %s\n" % before)
-		self.print_msg("Modified: %s\n" % after)
+		#after = self.convert_preset_to_ascii()
+		#self.print_msg("Original: %s\n" % before)
+		#self.print_msg("Modified: %s\n" % after)
 		msg = "Writing %s\n" % self.get_preset_name()
 		self.print_msg(msg)
 		self.write_current_preset()
@@ -248,7 +250,11 @@ class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 		if not self.midi:
 			self.warning_msg("No midi device selected\n")
 			return
-		self.load_current_preset()
+		index = self.prepare_preset_list()
+		if index < 0:
+			self.print_msg("No Preset selected!\n")
+			return
+		self.get_preset_from_data(index)
 		self.get_values_from_preset()
 
 	def print_msg(self, msg):
@@ -698,6 +704,49 @@ class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 		palette.setBrush(QtGui.QPalette.Active, \
 				 QtGui.QPalette.WindowText, brush)
 		self.Preset_Label.setPalette(palette)
+
+	def prepare_preset_list(self):
+		dialog = QtGui.QDialog()
+		dialog.setObjectName("dialog")
+		dialog.resize(810, 630)
+
+		buttonBox = QtGui.QDialogButtonBox(dialog)
+		buttonBox.setGeometry(QtCore.QRect(450, 580, 341, 32))
+		buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel| \
+						QtGui.QDialogButtonBox.Ok)
+		buttonBox.setObjectName("buttonBox")
+		QtCore.QMetaObject.connectSlotsByName(dialog)
+		table = QtGui.QTableWidget(25,5, dialog)
+		table.setGeometry(QtCore.QRect(70, 50, 661, 501))
+		sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Maximum, \
+						 QtGui.QSizePolicy.Maximum)
+		sizePolicy.setHorizontalStretch(1)
+		sizePolicy.setVerticalStretch(0)
+		sizePolicy.setHeightForWidth(table.sizePolicy().hasHeightForWidth())
+		table.setSizePolicy(sizePolicy)
+		table.setShowGrid(True)
+		table.setGridStyle(QtCore.Qt.SolidLine)
+		table.setCornerButtonEnabled(True)
+		table.setHorizontalHeaderLabels(["A","B","C","D","E"])
+		QtCore.QObject.connect(buttonBox, QtCore.SIGNAL("accepted()"), \
+					dialog.accept)
+		QtCore.QObject.connect(buttonBox, QtCore.SIGNAL("rejected()"), \
+					dialog.reject)
+		QtCore.QMetaObject.connectSlotsByName(dialog)
+
+		presets = self.get_preset_list()
+		for i in range(0, 5):
+			for j in range(0, 25):
+				item = QtGui.QTableWidgetItem()
+				item.setText(presets[j*5+i])
+				table.setItem(j, i, item)
+		dialog.exec_()
+		if dialog.result() == dialog.Accepted:
+			index = table.currentRow() * 5 + table.currentColumn()
+		else:
+			index = -1
+		return index
+		
 
 
 # main
