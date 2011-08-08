@@ -10,9 +10,6 @@ Later on I thought about writing a GUI to the scripts, and chose python,
 PyQt and QT4 as the tools for the job. I used QT Designer to create the
 prototype interface used here.
 
-Right now a few pieces of the MIDI related code need to be re-adapted,
-as I modified a few bits of code in order to publish it in this git tree.
-
 The initial idea was to have an interface to load and store presets both
 on the Bass V-Amp unit and on files (.syx). This is mostly done and the
 interface reflects what was read from the unit or from file.
@@ -28,7 +25,7 @@ already implemented and list the TODO tasks.
 
 * License:
 
-This code is GPL. The necessary license files and related stuff will be
-added soon. 
+This code is GPL. Please refer to the COPYING file for more details.
+
 
 
