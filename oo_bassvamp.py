@@ -7,11 +7,11 @@ import os
 
 
 BEHRINGER_SIGNATURE = "\x00\x20\x32"
-CMD_load_current_preset = "F0 00 20 32 00 13 60 7F F7"
-CMD_load_specific_preset = "F0 00 20 32 00 13 60"
-CMD_load_all_presets = "F0 00 20 32 00 13 61 F7"
-CMD_write_current_preset = "F0 00 20 32 00 13 20 7F"
-CMD_write_all_presets = "F0 00 20 32 00 13 21"
+CMD_load_current_preset = "F0 00 20 32 7F 13 60 7F F7"
+CMD_load_specific_preset = "F0 00 20 32 7F 13 60"
+CMD_load_all_presets = "F0 00 20 32 7F 13 61 F7"
+CMD_write_current_preset = "F0 00 20 32 7F 13 20 7F"
+CMD_write_all_presets = "F0 00 20 32 7F 13 21"
 CMD_identify_device = "F0 00 20 32 7F 7F 01 F7"
 Empty_Preset = CMD_write_current_preset + ' 00' * 57 + ' F7'
 
@@ -317,7 +317,7 @@ class BVamp():
 	def get_preset_from_data(self, index):
 		# I will try the commented code again, later
 		#pos = index * 56 + 9
-		#self.data = CMD_write_current_preset + \
+		#self.data = CMD_write_current_preset + chr(0x38)+ \
 		#		self.all_data[pos:(pos+56)] + chr(0xF7)
 		CMD_load_specific_preset
 		cmd = 'amidi -p hw:%s -S "%s %02X F7" -r /dev/stdout -t 1' % \
