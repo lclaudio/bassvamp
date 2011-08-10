@@ -816,7 +816,10 @@ class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 			self.unmark_modified(self.Split_Label_2)
 
 	def change_preset_name(self):
-		self.set_preset_name(self.Preset_lineEdit.text().toAscii())
+		name = self.Preset_lineEdit.text().toAscii()
+		self.set_preset_name(name)
+		orig = self.get_preset_name(self.orig_data)
+		self.verify_change(self.Preset_Label, orig, name)
 
 	def select_file_to_open(self):
 		filename = QtGui.QFileDialog.getOpenFileName(self, 'Open File',
@@ -904,6 +907,7 @@ class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 		self.unmark_modified(self.FXparm6_Label_2)
 		self.unmark_modified(self.FXparm7_Label)
 		self.unmark_modified(self.FXparm7_Label_2)
+		self.unmark_modified(self.Preset_Label)
 
 	def prepare_preset_list(self):
 		dialog = QtGui.QDialog()
