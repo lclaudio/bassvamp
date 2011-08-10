@@ -18,6 +18,7 @@ Empty_Preset = CMD_write_current_preset + ' 00' * 57 + ' F7'
 class BVamp():
 	def __init__(self):
 		self.data = self.convert_ascii_to_data(Empty_Preset)
+		self.orig_data = self.convert_ascii_to_data(Empty_Preset)
 		self.midi = None
 		self.modified = 0
 		self.device = 0
@@ -30,6 +31,7 @@ class BVamp():
 		result = aux.read(66)
 		aux.close()
 		self.data = result
+		self.orig_data = result
 
 	def load_all_presets(self):
 		if not self.needs_refresh:
@@ -85,95 +87,95 @@ class BVamp():
 
 		return text
 
-	def read_volume(self):
-		return ord(self.data[13])
+	def read_volume(self, source):
+		return ord(source[13])
 
-	def read_gain(self):
-		return ord(self.data[9])
+	def read_gain(self, source):
+		return ord(source[9])
 
-	def read_bass(self):
-		return ord(self.data[12])
+	def read_bass(self, source):
+		return ord(source[12])
 
-	def read_mid(self):
-		return ord(self.data[11])
+	def read_mid(self, source):
+		return ord(source[11])
 
-	def read_treble(self):
-		return ord(self.data[10])
+	def read_treble(self, source):
+		return ord(source[10])
 
-	def read_deep(self):
-		return ord(self.data[19])
+	def read_deep(self, source):
+		return ord(source[19])
 
-	def read_shift(self):
-		return ord(self.data[18])
+	def read_shift(self, source):
+		return ord(source[18])
 
-	def read_presence(self):
-		return ord(self.data[14])
+	def read_presence(self, source):
+		return ord(source[14])
 
-	def read_amp(self):
-		return ord(self.data[16])
+	def read_amp(self, source):
+		return ord(source[16])
 
-	def read_cabinet(self):
-		return ord(self.data[24])
+	def read_cabinet(self, source):
+		return ord(source[24])
 
-	def read_wah(self):
-		return ord(self.data[36])
+	def read_wah(self, source):
+		return ord(source[36])
 
-	def read_depth(self):
-		return ord(self.data[37])
+	def read_depth(self, source):
+		return ord(source[37])
 
-	def read_speed(self):
-		return ord(self.data[38])
+	def read_speed(self, source):
+		return ord(source[38])
 
-	def read_base(self):
-		return ord(self.data[39])
+	def read_base(self, source):
+		return ord(source[39])
 
-	def read_stomp(self):
-		return ord(self.data[30])
+	def read_stomp(self, source):
+		return ord(source[30])
 
-	def read_split(self):
-		return ord(self.data[34])
+	def read_split(self, source):
+		return ord(source[34])
 
-	def read_drive(self):
-		return ord(self.data[31])
+	def read_drive(self, source):
+		return ord(source[31])
 
-	def read_tone(self):
-		return ord(self.data[32])
+	def read_tone(self, source):
+		return ord(source[32])
 
-	def read_boost(self):
-		return ord(self.data[33])
+	def read_boost(self, source):
+		return ord(source[33])
 
-	def read_density(self):
-		return ord(self.data[15])
+	def read_density(self, source):
+		return ord(source[15])
 
-	def read_attack(self):
-		return ord(self.data[20])
+	def read_attack(self, source):
+		return ord(source[20])
 
-	def read_fx(self):
-		return ord(self.data[17])
+	def read_fx(self, source):
+		return ord(source[17])
 
-	def read_fxtype(self):
-		return ord(self.data[40])
+	def read_fxtype(self, source):
+		return ord(source[40])
 
-	def read_fxparm1(self):
-		return ord(self.data[41])
+	def read_fxparm1(self, source):
+		return ord(source[41])
 
-	def read_fxparm2(self):
-		return ord(self.data[42])
+	def read_fxparm2(self, source):
+		return ord(source[42])
 
-	def read_fxparm3(self):
-		return ord(self.data[43])
+	def read_fxparm3(self, source):
+		return ord(source[43])
 
-	def read_fxparm4(self):
-		return ord(self.data[44])
+	def read_fxparm4(self, source):
+		return ord(source[44])
 
-	def read_fxparm5(self):
-		return ord(self.data[45])
+	def read_fxparm5(self, source):
+		return ord(source[45])
 
-	def read_fxparm6(self):
-		return ord(self.data[46])
+	def read_fxparm6(self, source):
+		return ord(source[46])
 
-	def read_fxparm7(self):
-		return ord(self.data[47])
+	def read_fxparm7(self, source):
+		return ord(source[47])
 
 	def set_volume(self, value):
 		self.set_preset_item(13, value)
@@ -268,8 +270,8 @@ class BVamp():
 	def set_preset_item(self, pos, value):
 		self.data = self.data[:pos] + chr(value) + self.data[pos+1:]
 
-	def get_preset_name(self):
-		return self.data[-17:-1]
+	def get_preset_name(self, source):
+		return source[-17:-1]
 
 	def set_preset_name(self, value):
 		if len(value) >= 16:
@@ -304,6 +306,7 @@ class BVamp():
 	def load_preset_from_file(self, fname):
 		aux = open(fname, "rb")
 		self.data = aux.read(66)
+		self.orig_data = self.data
 		aux.close()
 
 	def get_preset_list(self):
@@ -326,5 +329,6 @@ class BVamp():
 		result = aux.read(66)
 		aux.close()
 		self.data = result
+		self.orig_data = result
 
 

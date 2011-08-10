@@ -240,7 +240,7 @@ class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 		#after = self.convert_preset_to_ascii()
 		#self.print_msg("Original: %s\n" % before)
 		#self.print_msg("Modified: %s\n" % after)
-		msg = "Writing %s\n" % self.get_preset_name()
+		msg = "Writing %s\n" % self.get_preset_name(self.data)
 		self.print_msg(msg)
 		self.write_current_preset()
 
@@ -272,21 +272,21 @@ class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 
 	def get_values_from_preset(self):
 		# Preset Label
-		name = "%s" % self.get_preset_name()
+		name = "%s" % self.get_preset_name(self.data)
 		self.print_msg("%s\n" % name)
 		self.Preset_lineEdit.setText(QtCore.QString(name))
 		# Dials
-		self.Volume_Dial.setValue(self.read_volume())
-		self.Gain_Dial.setValue(self.read_gain())
-		self.Bass_Dial.setValue(self.read_bass())
-		self.Mid_Dial.setValue(self.read_mid())
-		self.Treble_Dial.setValue(self.read_treble())
-		self.Deep_Dial.setValue(self.read_deep())
-		self.Shift_Dial.setValue(self.read_shift())
-		self.Presence_Dial.setValue(self.read_presence())
+		self.Volume_Dial.setValue(self.read_volume(self.data))
+		self.Gain_Dial.setValue(self.read_gain(self.data))
+		self.Bass_Dial.setValue(self.read_bass(self.data))
+		self.Mid_Dial.setValue(self.read_mid(self.data))
+		self.Treble_Dial.setValue(self.read_treble(self.data))
+		self.Deep_Dial.setValue(self.read_deep(self.data))
+		self.Shift_Dial.setValue(self.read_shift(self.data))
+		self.Presence_Dial.setValue(self.read_presence(self.data))
 		# Combo Boxes
-		self.Amp_Combo.setCurrentIndex(self.read_amp())
-		self.Cabinet_Combo.setCurrentIndex(self.read_cabinet())
+		self.Amp_Combo.setCurrentIndex(self.read_amp(self.data))
+		self.Cabinet_Combo.setCurrentIndex(self.read_cabinet(self.data))
 		# composite values
 		self.get_stomp_values()
 		self.get_wah_values()
@@ -318,7 +318,7 @@ class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 		else:
 			self.Compressor_Radio.setChecked(True)
 
-		if self.read_fxtype() == 15:
+		if self.read_fxtype(self.data) == 15:
 			self.FX_Radio.setChecked(False)
 		else:
 			self.FX_Radio.setChecked(True)
@@ -632,31 +632,31 @@ class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 		self.FXparm7_Label_2.setEnabled(False)
 
 	def get_stomp_values(self):
-		self.Stomp_Combo.setCurrentIndex(self.read_stomp())
-		self.Split_Dial.setValue(self.read_split())
-		self.Drive_Dial.setValue(self.read_drive())
-		self.Tone_Dial.setValue(self.read_tone())
-		self.Boost_Dial.setValue(self.read_boost())
+		self.Stomp_Combo.setCurrentIndex(self.read_stomp(self.data))
+		self.Split_Dial.setValue(self.read_split(self.data))
+		self.Drive_Dial.setValue(self.read_drive(self.data))
+		self.Tone_Dial.setValue(self.read_tone(self.data))
+		self.Boost_Dial.setValue(self.read_boost(self.data))
 
 	def get_wah_values(self):
-		self.Wah_Combo.setCurrentIndex(self.read_wah())
-		self.Depth_Dial.setValue(self.read_depth())
-		self.Speed_Dial.setValue(self.read_speed())
-		self.Base_Dial.setValue(self.read_base())
+		self.Wah_Combo.setCurrentIndex(self.read_wah(self.data))
+		self.Depth_Dial.setValue(self.read_depth(self.data))
+		self.Speed_Dial.setValue(self.read_speed(self.data))
+		self.Base_Dial.setValue(self.read_base(self.data))
 
 	def get_compressor_values(self):
-		self.Density_Dial.setValue(self.read_density())
-		self.Attack_Dial.setValue(self.read_attack())
+		self.Density_Dial.setValue(self.read_density(self.data))
+		self.Attack_Dial.setValue(self.read_attack(self.data))
 
 	def get_fx_values(self):
-		self.FX_Combo.setCurrentIndex(self.read_fxtype())
-		self.FXparm1_Dial.setValue(self.read_fxparm1())
-		self.FXparm2_Dial.setValue(self.read_fxparm2())
-		self.FXparm3_Dial.setValue(self.read_fxparm3())
-		self.FXparm4_Dial.setValue(self.read_fxparm4())
-		self.FXparm5_Dial.setValue(self.read_fxparm5())
-		self.FXparm6_Dial.setValue(self.read_fxparm6())
-		self.FXparm7_Dial.setValue(self.read_fxparm7())
+		self.FX_Combo.setCurrentIndex(self.read_fxtype(self.data))
+		self.FXparm1_Dial.setValue(self.read_fxparm1(self.data))
+		self.FXparm2_Dial.setValue(self.read_fxparm2(self.data))
+		self.FXparm3_Dial.setValue(self.read_fxparm3(self.data))
+		self.FXparm4_Dial.setValue(self.read_fxparm4(self.data))
+		self.FXparm5_Dial.setValue(self.read_fxparm5(self.data))
+		self.FXparm6_Dial.setValue(self.read_fxparm6(self.data))
+		self.FXparm7_Dial.setValue(self.read_fxparm7(self.data))
 
 	def show_split_freq(self):
 		idx = self.Split_Dial.value()
