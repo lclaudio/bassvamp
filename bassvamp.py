@@ -25,7 +25,7 @@ FX_List = [
 ["MIDI Synth", "Synth Mix", "Variation", "-", "-", "Reverb", "-", "-"],
 ["No FX", "-", "-", "-", "-", "-", "-", "-"] ]
 
-Split_Steps = [ 41, 49, 58, 70, 84, 101, 121, 145, 174, 209, 251, 301, 362,
+Split_Steps = [ 0, 41, 49, 58, 70, 84, 101, 121, 145, 174, 209, 251, 301, 362,
 		416, 470, 531, 600 ]
 
 class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
@@ -41,35 +41,35 @@ class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 		# Volume dial
 		QtCore.QObject.connect(self.Volume_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
-				self.Volume_Label_2.setNum) 
+				self.volume_label) 
 		# Gain dial
 		QtCore.QObject.connect(self.Gain_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
-				self.Gain_Label_2.setNum) 
+				self.gain_label) 
 		# Bass dial
 		QtCore.QObject.connect(self.Bass_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
-				self.Bass_Label_2.setNum) 
+				self.bass_label) 
 		# Mid dial
 		QtCore.QObject.connect(self.Mid_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
-				self.Mid_Label_2.setNum) 
+				self.mid_label) 
 		# Treble dial
 		QtCore.QObject.connect(self.Treble_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
-				self.Treble_Label_2.setNum) 
+				self.treble_label) 
 		# Deep dial
 		QtCore.QObject.connect(self.Deep_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
-				self.Deep_Label_2.setNum) 
+				self.deep_label) 
 		# Shift dial
 		QtCore.QObject.connect(self.Shift_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
-				self.Shift_Label_2.setNum) 
+				self.shift_label)
 		# Presence dial
 		QtCore.QObject.connect(self.Presence_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
-				self.Presence_Label_2.setNum) 
+				self.presence_label)
 		# Split dial
 		QtCore.QObject.connect(self.Split_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
@@ -77,63 +77,63 @@ class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 		# Drive dial
 		QtCore.QObject.connect(self.Drive_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
-				self.Drive_Label_2.setNum) 
+				self.drive_label) 
 		# Tone dial
 		QtCore.QObject.connect(self.Tone_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
-				self.Tone_Label_2.setNum) 
+				self.tone_label) 
 		# Boost dial
 		QtCore.QObject.connect(self.Boost_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
-				self.Boost_Label_2.setNum) 
+				self.boost_label) 
 		# Depth dial
 		QtCore.QObject.connect(self.Depth_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
-				self.Depth_Label_2.setNum) 
+				self.depth_label) 
 		# Speed dial
 		QtCore.QObject.connect(self.Speed_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
-				self.Speed_Label_2.setNum) 
+				self.speed_label) 
 		# Base dial
 		QtCore.QObject.connect(self.Base_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
-				self.Base_Label_2.setNum) 
+				self.base_label) 
 		# Density dial
 		QtCore.QObject.connect(self.Density_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
-				self.Density_Label_2.setNum) 
+				self.density_label) 
 		# Attack dial
 		QtCore.QObject.connect(self.Attack_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
-				self.Attack_Label_2.setNum) 
+				self.attack_label) 
 		# FX Param1 dial
 		QtCore.QObject.connect(self.FXparm1_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
-				self.FXparm1_Label_2.setNum) 
+				self.fxparm1_label) 
 		# FX Param2 dial
 		QtCore.QObject.connect(self.FXparm2_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
-				self.FXparm2_Label_2.setNum) 
+				self.fxparm2_label) 
 		# FX Param3 dial
 		QtCore.QObject.connect(self.FXparm3_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
-				self.FXparm3_Label_2.setNum) 
+				self.fxparm3_label) 
 		# FX Param4 dial
 		QtCore.QObject.connect(self.FXparm4_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
-				self.FXparm4_Label_2.setNum) 
+				self.fxparm4_label) 
 		# FX Param5 dial
 		QtCore.QObject.connect(self.FXparm5_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
-				self.FXparm5_Label_2.setNum) 
+				self.fxparm5_label) 
 		# FX Param6 dial
 		QtCore.QObject.connect(self.FXparm6_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
-				self.FXparm6_Label_2.setNum) 
+				self.fxparm6_label) 
 		# FX Param7 dial
 		QtCore.QObject.connect(self.FXparm7_Dial, \
 				QtCore.SIGNAL("valueChanged(int)"), \
-				self.FXparm7_Label_2.setNum) 
+				self.fxparm7_label) 
 		# Amp radiobutton 
 		QtCore.QObject.connect(self.Amp_Radio, \
 				QtCore.SIGNAL("toggled(bool)"), \
@@ -193,6 +193,150 @@ class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 		QtCore.QMetaObject.connectSlotsByName(self) 
 
 
+	def volume_label(self, num):
+		self.Volume_Label_2.setNum(num)
+		orig = self.read_volume(self.orig_data)
+		self.verify_change(self.Volume_Label, orig, num)
+		self.verify_change(self.Volume_Label_2, orig, num)
+
+	def gain_label(self, num):
+		self.Gain_Label_2.setNum(num)
+		orig = self.read_gain(self.orig_data)
+		self.verify_change(self.Gain_Label, orig, num)
+		self.verify_change(self.Gain_Label_2, orig, num)
+
+	def bass_label(self, num):
+		self.Bass_Label_2.setNum(num)
+		orig = self.read_bass(self.orig_data)
+		self.verify_change(self.Bass_Label, orig, num)
+		self.verify_change(self.Bass_Label_2, orig, num)
+
+	def mid_label(self, num):
+		self.Mid_Label_2.setNum(num)
+		orig = self.read_gain(self.orig_data)
+		self.verify_change(self.Mid_Label, orig, num)
+		self.verify_change(self.Mid_Label_2, orig, num)
+
+	def treble_label(self, num):
+		self.Treble_Label_2.setNum(num)
+		orig = self.read_gain(self.orig_data)
+		self.verify_change(self.Treble_Label, orig, num)
+		self.verify_change(self.Treble_Label_2, orig, num)
+
+	def deep_label(self, num):
+		self.Deep_Label_2.setNum(num)
+		orig = self.read_gain(self.orig_data)
+		self.verify_change(self.Deep_Label, orig, num)
+		self.verify_change(self.Deep_Label_2, orig, num)
+		
+	def shift_label(self, num):
+		self.Shift_Label_2.setNum(num)
+		orig = self.read_shift(self.orig_data)
+		self.verify_change(self.Shift_Label, orig, num)
+		self.verify_change(self.Shift_Label_2, orig, num)
+
+	def presence_label(self, num):
+		self.Presence_Label_2.setNum(num)
+		orig = self.read_presence(self.orig_data)
+		self.verify_change(self.Presence_Label, orig, num)
+		self.verify_change(self.Presence_Label_2, orig, num)
+
+	def drive_label(self, num):
+		self.Drive_Label_2.setNum(num)
+		orig = self.read_drive(self.orig_data)
+		self.verify_change(self.Drive_Label, orig, num)
+		self.verify_change(self.Drive_Label_2, orig, num)
+
+	def tone_label(self, num):
+		self.Tone_Label_2.setNum(num)
+		orig = self.read_tone(self.orig_data)
+		self.verify_change(self.Tone_Label, orig, num)
+		self.verify_change(self.Tone_Label_2, orig, num)
+
+	def boost_label(self, num):
+		self.Boost_Label_2.setNum(num)
+		orig = self.read_boost(self.orig_data)
+		self.verify_change(self.Boost_Label, orig, num)
+		self.verify_change(self.Boost_Label_2, orig, num)
+
+	def depth_label(self, num):
+		self.Depth_Label_2.setNum(num)
+		orig = self.read_depth(self.orig_data)
+		self.verify_change(self.Depth_Label, orig, num)
+		self.verify_change(self.Depth_Label_2, orig, num)
+
+	def speed_label(self, num):
+		self.Speed_Label_2.setNum(num)
+		orig = self.read_speed(self.orig_data)
+		self.verify_change(self.Speed_Label, orig, num)
+		self.verify_change(self.Speed_Label_2, orig, num)
+
+	def base_label(self, num):
+		self.Base_Label_2.setNum(num)
+		orig = self.read_base(self.orig_data)
+		self.verify_change(self.Base_Label, orig, num)
+		self.verify_change(self.Base_Label_2, orig, num)
+
+	def density_label(self, num):
+		self.Density_Label_2.setNum(num)
+		orig = self.read_density(self.orig_data)
+		self.verify_change(self.Density_Label, orig, num)
+		self.verify_change(self.Density_Label_2, orig, num)
+
+	def attack_label(self, num):
+		self.Attack_Label_2.setNum(num)
+		orig = self.read_attack(self.orig_data)
+		self.verify_change(self.Attack_Label, orig, num)
+		self.verify_change(self.Attack_Label_2, orig, num)
+
+	def fxparm1_label(self, num):
+		self.FXparm1_Label_2.setNum(num)
+		orig = self.read_fxparm1(self.orig_data)
+		self.verify_change(self.FXparm1_Label, orig, num)
+		self.verify_change(self.FXparm1_Label_2, orig, num)
+
+	def fxparm2_label(self, num):
+		self.FXparm2_Label_2.setNum(num)
+		orig = self.read_fxparm2(self.orig_data)
+		self.verify_change(self.FXparm2_Label, orig, num)
+		self.verify_change(self.FXparm2_Label_2, orig, num)
+
+	def fxparm3_label(self, num):
+		self.FXparm3_Label_2.setNum(num)
+		orig = self.read_fxparm3(self.orig_data)
+		self.verify_change(self.FXparm3_Label, orig, num)
+		self.verify_change(self.FXparm3_Label_2, orig, num)
+
+	def fxparm4_label(self, num):
+		self.FXparm4_Label_2.setNum(num)
+		orig = self.read_fxparm4(self.orig_data)
+		self.verify_change(self.FXparm4_Label, orig, num)
+		self.verify_change(self.FXparm4_Label_2, orig, num)
+
+	def fxparm5_label(self, num):
+		self.FXparm5_Label_2.setNum(num)
+		orig = self.read_fxparm5(self.orig_data)
+		self.verify_change(self.FXparm5_Label, orig, num)
+		self.verify_change(self.FXparm5_Label_2, orig, num)
+
+	def fxparm6_label(self, num):
+		self.FXparm6_Label_2.setNum(num)
+		orig = self.read_fxparm6(self.orig_data)
+		self.verify_change(self.FXparm6_Label, orig, num)
+		self.verify_change(self.FXparm6_Label_2, orig, num)
+
+	def fxparm7_label(self, num):
+		self.FXparm7_Label_2.setNum(num)
+		orig = self.read_fxparm7(self.orig_data)
+		self.verify_change(self.FXparm7_Label, orig, num)
+		self.verify_change(self.FXparm7_Label_2, orig, num)
+
+	def verify_change(self, obj, orig, value):
+		if orig != value:
+			self.mark_modified(obj)
+		else:
+			self.unmark_modified(obj)
+
 	def select_midi_device(self, devlist, index):
 		aux = QtGui.QInputDialog()
 		aux.setOption(aux.UseListViewForComboBoxItems, False)
@@ -243,6 +387,7 @@ class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 		msg = "Writing %s\n" % self.get_preset_name(self.data)
 		self.print_msg(msg)
 		self.write_current_preset()
+		self.unmark_all_changes()
 
 	def read_vamp_preset(self):
 		if not self.midi:
@@ -256,6 +401,7 @@ class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 			return
 		self.get_preset_from_data(index)
 		self.get_values_from_preset()
+		self.unmark_all_changes()
 
 	def print_msg(self, msg):
 		text = QtCore.QString(msg)
@@ -375,6 +521,7 @@ class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 		self.Preset_lineEdit.setText(text)
 		self.load_preset_from_file(fname)
 		self.get_values_from_preset()
+		self.unmark_all_changes()
 
 	def manage_amp_simulation(self):
 		if self.Amp_Radio.isChecked():
@@ -658,10 +805,15 @@ class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 		self.FXparm6_Dial.setValue(self.read_fxparm6(self.data))
 		self.FXparm7_Dial.setValue(self.read_fxparm7(self.data))
 
-	def show_split_freq(self):
-		idx = self.Split_Dial.value()
-		freq = "%d Hz" % Split_Steps[idx]
+	def show_split_freq(self, num):
+		freq = "%d Hz" % Split_Steps[num]
 		self.Split_Label_2.setText(QtCore.QString(freq))
+		if self.read_split(self.orig_data) != num:
+			self.mark_modified(self.Split_Label)
+			self.mark_modified(self.Split_Label_2)
+		else:
+			self.unmark_modified(self.Split_Label)
+			self.unmark_modified(self.Split_Label_2)
 
 	def change_preset_name(self):
 		self.set_preset_name(self.Preset_lineEdit.text().toAscii())
@@ -674,7 +826,7 @@ class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 		fname = filename.split('/')[-1]
 		self.path = filename[:-(len(fname))]
 		self.load_preset_file(filename)
-		self.remove_modified_flag()
+		self.modified=0
 
 	def select_file_to_save(self):
 		filename = QtGui.QFileDialog.getSaveFileName(self, 'Save File',
@@ -685,25 +837,73 @@ class Bass_Vamp(QMainWindow, Ui_mainWindow, BVamp):
 		fname = filename.split('/')[-1]
 		self.path = filename[:-(len(fname))]
 		self.save_preset_to_file(filename)
-		self.remove_modified_flag()
+		self.modified=0
 
-	def set_modified_flag(self):
+	def mark_modified(self, obj):
 		self.modified = 1
 		palette = QtGui.QPalette()
 		brush = QtGui.QBrush(QtGui.QColor(170, 0, 0))
 		brush.setStyle(QtCore.Qt.SolidPattern)
 		palette.setBrush(QtGui.QPalette.Active, \
 				 QtGui.QPalette.WindowText, brush)
-		self.Preset_Label.setPalette(palette)
+		obj.setPalette(palette)
 
-	def remove_modified_flag(self):
+	def unmark_modified(self, obj):
 		self.modified = 0
 		palette = QtGui.QPalette()
 		brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
 		brush.setStyle(QtCore.Qt.SolidPattern)
 		palette.setBrush(QtGui.QPalette.Active, \
 				 QtGui.QPalette.WindowText, brush)
-		self.Preset_Label.setPalette(palette)
+		obj.setPalette(palette)
+
+	def unmark_all_changes(self):
+		self.unmark_modified(self.Volume_Label)
+		self.unmark_modified(self.Volume_Label_2)
+		self.unmark_modified(self.Gain_Label)
+		self.unmark_modified(self.Gain_Label_2)
+		self.unmark_modified(self.Bass_Label)
+		self.unmark_modified(self.Bass_Label_2)
+		self.unmark_modified(self.Mid_Label)
+		self.unmark_modified(self.Mid_Label_2)
+		self.unmark_modified(self.Treble_Label)
+		self.unmark_modified(self.Treble_Label_2)
+		self.unmark_modified(self.Deep_Label)
+		self.unmark_modified(self.Deep_Label_2)
+		self.unmark_modified(self.Shift_Label)
+		self.unmark_modified(self.Shift_Label_2)
+		self.unmark_modified(self.Presence_Label)
+		self.unmark_modified(self.Presence_Label_2)
+		self.unmark_modified(self.Drive_Label)
+		self.unmark_modified(self.Drive_Label_2)
+		self.unmark_modified(self.Tone_Label)
+		self.unmark_modified(self.Tone_Label_2)
+		self.unmark_modified(self.Boost_Label)
+		self.unmark_modified(self.Boost_Label_2)
+		self.unmark_modified(self.Depth_Label)
+		self.unmark_modified(self.Depth_Label_2)
+		self.unmark_modified(self.Speed_Label)
+		self.unmark_modified(self.Speed_Label_2)
+		self.unmark_modified(self.Base_Label)
+		self.unmark_modified(self.Base_Label_2)
+		self.unmark_modified(self.Density_Label)
+		self.unmark_modified(self.Density_Label_2)
+		self.unmark_modified(self.Attack_Label)
+		self.unmark_modified(self.Attack_Label_2)
+		self.unmark_modified(self.FXparm1_Label)
+		self.unmark_modified(self.FXparm1_Label_2)
+		self.unmark_modified(self.FXparm2_Label)
+		self.unmark_modified(self.FXparm2_Label_2)
+		self.unmark_modified(self.FXparm3_Label)
+		self.unmark_modified(self.FXparm3_Label_2)
+		self.unmark_modified(self.FXparm4_Label)
+		self.unmark_modified(self.FXparm4_Label_2)
+		self.unmark_modified(self.FXparm5_Label)
+		self.unmark_modified(self.FXparm5_Label_2)
+		self.unmark_modified(self.FXparm6_Label)
+		self.unmark_modified(self.FXparm6_Label_2)
+		self.unmark_modified(self.FXparm7_Label)
+		self.unmark_modified(self.FXparm7_Label_2)
 
 	def prepare_preset_list(self):
 		dialog = QtGui.QDialog()

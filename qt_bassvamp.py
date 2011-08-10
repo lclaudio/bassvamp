@@ -577,7 +577,7 @@ class Ui_mainWindow(object):
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ButtonText, brush)
         self.Split_Dial.setPalette(palette)
-        self.Split_Dial.setMaximum(16)
+        self.Split_Dial.setMaximum(17)
         self.Split_Dial.setNotchesVisible(True)
         self.Split_Dial.setObjectName("Split_Dial")
         self.Drive_Label = QtGui.QLabel(self.centralwidget)
